@@ -14,6 +14,8 @@ package cl.bci.ms_usuarios.controllers;
 
 import cl.bci.ms_usuarios.dtos.UserRq;
 import cl.bci.ms_usuarios.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +46,9 @@ public class UserController {
      * @param userRq {@link UserRq}
      * @return {@link ResponseEntity}
      */
+    @Operation(summary = "Crear usuario", description = "Enpoint que permite el registro de un nuevo usuario")
+    @ApiResponse(responseCode = "201", description = "Usuario creado con exito")
+    @ApiResponse(responseCode = "400", description = "Error al intentar crear el usuario")
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody final UserRq userRq) {
         final var user = this.userService.createUser(userRq);
